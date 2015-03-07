@@ -1,9 +1,11 @@
 package com.redbooth.projectnevada;
 
 public class Card {
+    private final CardType cardType;
     private Status status;
 
-    public Card() {
+    public Card(CardType cardType) {
+        this.cardType = cardType;
         this.status = Status.UPWARDS;
     }
 
@@ -20,6 +22,10 @@ public class Card {
                 status = Status.UPWARDS;
                 break;
         }
+    }
+
+    public CardType getCardType() {
+        return cardType;
     }
 
     public enum Status {

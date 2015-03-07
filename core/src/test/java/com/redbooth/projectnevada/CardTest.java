@@ -11,7 +11,7 @@ public class CardTest {
     private Card card;
 
     @Before public void setup() {
-        card = new Card();
+        card = new Card(CardType.BROWN);
     }
 
     @Test public void shouldBeInitializedUpwards() {
