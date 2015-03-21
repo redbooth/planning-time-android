@@ -43,19 +43,23 @@ public class CardView extends FrameLayout {
     //region "PUBLIC METHODS"
 
     public void revealCard() {
-        this.cardStatus = CardModel.CardStatus.UPWARDS;
-        outRevealAnimation.setTarget(downwardView);
-        outRevealAnimation.start();
-        inRevealAnimation.setTarget(upwardView);
-        inRevealAnimation.start();
+        if (cardStatus == CardModel.CardStatus.DOWNWARDS) {
+            this.cardStatus = CardModel.CardStatus.UPWARDS;
+            outRevealAnimation.setTarget(downwardView);
+            outRevealAnimation.start();
+            inRevealAnimation.setTarget(upwardView);
+            inRevealAnimation.start();
+        }
     }
 
     public void hideCard() {
-        this.cardStatus = CardModel.CardStatus.DOWNWARDS;
-        inRevealAnimation.setTarget(downwardView);
-        inRevealAnimation.start();
-        outRevealAnimation.setTarget(upwardView);
-        outRevealAnimation.start();
+        if (cardStatus == CardModel.CardStatus.UPWARDS) {
+            this.cardStatus = CardModel.CardStatus.DOWNWARDS;
+            inRevealAnimation.setTarget(downwardView);
+            inRevealAnimation.start();
+            outRevealAnimation.setTarget(upwardView);
+            outRevealAnimation.start();
+        }
     }
 
     public void setCard(CardModel card) {
