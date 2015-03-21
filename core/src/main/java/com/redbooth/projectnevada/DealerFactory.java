@@ -1,18 +1,14 @@
 package com.redbooth.projectnevada;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class DealerFactory {
     public static Dealer getInstance() {
-        return new Dealer(getCards());
+        return new Dealer(getCards(), 0);
     }
 
     private static List<Card> getCards() {
-        List<Card> cards = new ArrayList<>();
-        for (CardType cardType : CardType.values()) {
-            cards.add(new Card(cardType));
-        }
-        return cards;
+        return Arrays.asList(Card.values());
     }
 }

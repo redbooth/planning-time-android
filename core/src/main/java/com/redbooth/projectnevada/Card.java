@@ -1,35 +1,28 @@
 package com.redbooth.projectnevada;
 
-public class Card {
-    private final CardType cardType;
-    private Status status;
+public enum Card {
+    ONE("Low hanging fruit"),
+    TWO("Piece of cake"),
+    THREE("???"),
+    FIVE("Cinco ornitorrinco"),
+    EIGHT("???"),
+    THIRTEEN("???"),
+    TWENTY("Don't put all the eggs in one basket"),
+    FORTY("Berenjenal"),
+    HUNDRED("???"),
+    INFINITE("When pigs fly"),
+    UNKNOWN("Here be dragons"),
+    PAUSE("Time for a ping pong"),
+    BROWN("It's clearly a brown"),
+    YAK_SHAVING("Yak shaving!");
 
-    public Card(CardType cardType) {
-        this.cardType = cardType;
-        this.status = Status.UPWARDS;
+    private final String legend;
+
+    Card(String legend) {
+        this.legend = legend;
     }
 
-    public Status getStatus() {
-        return status;
-    }
-
-    public void flip() {
-        switch (status) {
-            case UPWARDS:
-                status = Status.DOWNWARDS;
-                break;
-            case DOWNWARDS:
-                status = Status.UPWARDS;
-                break;
-        }
-    }
-
-    public CardType getCardType() {
-        return cardType;
-    }
-
-    public enum Status {
-        UPWARDS,
-        DOWNWARDS
+    public String getLegend() {
+        return legend;
     }
 }

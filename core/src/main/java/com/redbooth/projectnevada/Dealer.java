@@ -3,29 +3,70 @@ package com.redbooth.projectnevada;
 import java.util.List;
 
 public class Dealer {
-    private final List<Card> cards;
+    private final List<Card> deck;
+    private DeckStatus deckStatus;
     private int selectedCardPosition;
 
-    public Dealer(List<Card> cards) {
-        this.cards = cards;
-        this.selectedCardPosition = 0;
+    public Dealer(List<Card> deck, int position) {
+        this.deck = deck;
+        this.selectedCardPosition = position;
+        this.deckStatus = DeckStatus.UPWARDS;
     }
 
     public Card getCard() {
-        return cards.get(selectedCardPosition);
+        return deck.get(selectedCardPosition);
     }
 
     public Card getNext() {
-        selectedCardPosition = (selectedCardPosition + 1) % cards.size();
-        return cards.get(selectedCardPosition);
+        return deck.get(getNextPosition());
+    }
+
+    private int getNextPosition() {
+        return (selectedCardPosition + 1) % deck.size();
+    }
+
+    public void moveNext() {
+        selectedCardPosition = getNextPosition();
     }
 
     public Card getPrevious() {
-        selectedCardPosition = (selectedCardPosition - 1 + cards.size()) % cards.size();
-        return cards.get(selectedCardPosition);
+        return deck.get(getPreviousPosition());
+    }
+
+    private int getPreviousPosition() {
+        return (selectedCardPosition - 1 + deck.size()) % deck.size();
+    }
+
+    public void movePrevious() {
+        selectedCardPosition = getPreviousPosition();
     }
 
     public boolean isLast() {
-        return selectedCardPosition == cards.size() - 1;
+        return selectedCardPosition == deck.size() - 1;
     }
+
+    public int getDeckLength() {
+        return deck.size();
+    }
+
+    public DeckStatus getDeckStatus() {
+        return deckStatus;
+    }
+
+    public void flipDeck() {
+        switch (deckStatus) {
+            case UPWARDS:
+                deckStatus = DeckStatus.DOWNWARDS;
+                break;
+            case DOWNWARDS:
+                deckStatus = DeckStatus.UPWARDS;
+                break;
+        }
+    }
+
+    public enum DeckStatus {
+        UPWARDS,
+        DOWNWARDS
+    }
+
 }

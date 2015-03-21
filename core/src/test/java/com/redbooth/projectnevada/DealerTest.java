@@ -12,9 +12,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(JUnit4.class)
 public class DealerTest {
-    private static final Card FIRST_CARD = new Card(CardType.BROWN);
-    private static final Card SECOND_CARD = new Card(CardType.UNKNOWN);
-    private static final Card THIRD_CARD = new Card(CardType.INFINITE);
+    private static final int INITIAL_POSITION = 0;
+    private static final Card FIRST_CARD = Card.BROWN;
+    private static final Card SECOND_CARD = Card.UNKNOWN;
+    private static final Card THIRD_CARD = Card.INFINITE;
     private Dealer dealer;
     private static final List<Card> cards = new ArrayList<>(3);
     static {
@@ -25,7 +26,7 @@ public class DealerTest {
 
     @Before
     public void setup() {
-       dealer = new Dealer(cards);
+       dealer = new Dealer(cards, INITIAL_POSITION);
     }
 
     @Test public void shouldReturnTheFirstCard() {
@@ -41,8 +42,8 @@ public class DealerTest {
     }
 
     @Test public void shouldReturnFirstCardCallingNextFromLastCard() {
-        dealer.getNext();
-        dealer.getNext();
+        dealer.moveNext();
+        dealer.moveNext();
         Card firstCard = dealer.getNext();
 
         assertThat(firstCard).isEqualTo(FIRST_CARD);
@@ -55,7 +56,7 @@ public class DealerTest {
     }
 
     @Test public void shouldReturnTrueIfIsLastCard() {
-        dealer.getPrevious();
+        dealer.movePrevious();
         boolean isLast = dealer.isLast();
 
         assertThat(isLast).isEqualTo(true);
@@ -66,5 +67,30 @@ public class DealerTest {
         boolean isLast = dealer.isLast();
 
         assertThat(isLast).isEqualTo(false);
+    }
+
+    @Test public void shouldReturnDeckLength() {
+        int length = dealer.getDeckLength();
+
+        assertThat(length).isEqualTo(3);
+    }
+
+    @Test public void shouldBeInitializedUpwards() {
+        Dealer.DeckStatus status = dealer.getDeckStatus();
+
+        assertThat(status).isEqualTo(Dealer.DeckStatus.UPWARDS);
+    }
+
+    @Test public void shouldBeDownwardsAfterFirstFlip() {
+        dealer.flipDeck();
+
+        assertThat(dealer.getDeckStatus()).isEqualTo(Dealer.DeckStatus.DOWNWARDS);
+    }
+
+    @Test public void shouldBeUpwardsAfterAFlipFromDownwards() {
+        dealer.flipDeck();
+        dealer.flipDeck();
+
+        assertThat(dealer.getDeckStatus()).isEqualTo(Dealer.DeckStatus.UPWARDS);
     }
 }
