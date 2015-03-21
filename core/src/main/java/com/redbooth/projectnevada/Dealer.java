@@ -7,7 +7,7 @@ public class Dealer {
     private DeckStatus deckStatus;
     private int selectedCardPosition;
 
-    public Dealer(List<Card> deck, int position) {
+    Dealer(List<Card> deck, int position) {
         this.deck = deck;
         this.selectedCardPosition = position;
         this.deckStatus = DeckStatus.UPWARDS;
