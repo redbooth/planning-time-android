@@ -1,5 +1,8 @@
 package com.redbooth.projectnevada;
 
+import com.redbooth.projectnevada.core.Card;
+import com.redbooth.projectnevada.core.Dealer;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
