@@ -16,10 +16,19 @@ public class CardActivity extends ActionBarActivity {
         CardModel card = new CardModel.Builder()
                                 .setUpwardResourceId(R.drawable.card_upward_ping_pong)
                                 .setDownwardResourceId(R.drawable.card_downward)
-                                .setStatus(CardModel.CardStatus.UPWARDS)
+                                .setStatus(CardModel.CardStatus.DOWNWARDS)
                                 .build();
-        final com.redbooth.projectnevada.widgets.CardView cardView
-                            = (com.redbooth.projectnevada.widgets.CardView)findViewById(R.id.card);
-        cardView.setCard(card);
+        final com.redbooth.projectnevada.widgets.CardView cardView1
+                = (com.redbooth.projectnevada.widgets.CardView)findViewById(R.id.card1);
+        final com.redbooth.projectnevada.widgets.CardView cardView2
+                = (com.redbooth.projectnevada.widgets.CardView)findViewById(R.id.card2);
+        final com.redbooth.projectnevada.widgets.CardView cardView3
+                = (com.redbooth.projectnevada.widgets.CardView)findViewById(R.id.card3);
+        final com.redbooth.projectnevada.widgets.CardView cardView4
+                = (com.redbooth.projectnevada.widgets.CardView)findViewById(R.id.card4);
+        cardView1.setCard(card);
+        cardView2.setCard(card);
+        cardView3.setCard(card);
+        cardView4.setCard(card);
     }
 }
