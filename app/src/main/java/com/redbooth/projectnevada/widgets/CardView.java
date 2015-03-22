@@ -1,7 +1,8 @@
 package com.redbooth.projectnevada.widgets;
 
 import android.animation.Animator;
-import android.animation.AnimatorInflater;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+
 import com.redbooth.projectnevada.R;
 import com.redbooth.projectnevada.model.CardModel;
 
@@ -16,12 +18,12 @@ public class CardView extends FrameLayout {
 
     //region "PRIVATE VARIABLES"
 
+    private final static int FLIP_ANIMATION_DURATION = 300;
+
     private CardModel.CardStatus cardStatus;
     private CardModel card;
     private ImageView upwardView;
     private ImageView downwardView;
-    private Animator inRevealAnimation;
-    private Animator outRevealAnimation;
 
     //endregion
 
@@ -30,11 +32,11 @@ public class CardView extends FrameLayout {
     private OnClickListener onCardClick = new OnClickListener() {
         @Override
         public void onClick(View view) {
-            if (cardStatus == CardModel.CardStatus.UPWARDS) {
-                hideCard();
-            } else {
-                revealCard();
-            }
+        if (cardStatus == CardModel.CardStatus.UPWARDS) {
+            hideCard();
+        } else {
+            revealCard();
+        }
         }
     };
 
@@ -45,20 +47,14 @@ public class CardView extends FrameLayout {
     public void revealCard() {
         if (cardStatus == CardModel.CardStatus.DOWNWARDS) {
             this.cardStatus = CardModel.CardStatus.UPWARDS;
-            outRevealAnimation.setTarget(downwardView);
-            outRevealAnimation.start();
-            inRevealAnimation.setTarget(upwardView);
-            inRevealAnimation.start();
+            startDiscoverCardAnimation();
         }
     }
 
     public void hideCard() {
         if (cardStatus == CardModel.CardStatus.UPWARDS) {
             this.cardStatus = CardModel.CardStatus.DOWNWARDS;
-            inRevealAnimation.setTarget(downwardView);
-            inRevealAnimation.start();
-            outRevealAnimation.setTarget(upwardView);
-            outRevealAnimation.start();
+            startHideCardAnimation();
         }
     }
 
@@ -74,19 +70,16 @@ public class CardView extends FrameLayout {
 
     public CardView(Context context) {
         super(context);
-        initializeAnimations();
         initializeSelfView();
     }
 
     public CardView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        initializeAnimations();
         initializeSelfView();
     }
 
     public CardView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        initializeAnimations();
         initializeSelfView();
     }
 
@@ -115,9 +108,36 @@ public class CardView extends FrameLayout {
         }
     }
 
-    private void initializeAnimations() {
-        inRevealAnimation = AnimatorInflater.loadAnimator(getContext(), R.animator.card_flip_right_in);
-        outRevealAnimation = AnimatorInflater.loadAnimator(getContext(), R.animator.card_flip_left_out);
+    private void startHideCardAnimation() {
+        upwardView
+            .animate()
+                .setDuration(FLIP_ANIMATION_DURATION)
+                .rotationY(-180f)
+                .alpha(0f)
+                    .start();
+
+        downwardView
+            .animate()
+                .setDuration(FLIP_ANIMATION_DURATION)
+                .rotationY(-180f)
+                .alpha(1f)
+                    .start();
+    }
+
+    private void startDiscoverCardAnimation() {
+        downwardView
+                .animate()
+                .setDuration(FLIP_ANIMATION_DURATION)
+                .rotationY(0f)
+                .alpha(0f)
+                    .start();
+
+        upwardView
+                .animate()
+                .setDuration(FLIP_ANIMATION_DURATION)
+                .rotationY(0f)
+                .alpha(1f)
+                    .start();
     }
 
     private void initializeSelfView() {
@@ -132,8 +152,8 @@ public class CardView extends FrameLayout {
         downwardView = new ImageView(getContext());
         downwardView.setScaleType(ImageView.ScaleType.FIT_XY);
         downwardView.setLayoutParams(viewParams);
-        this.addView(upwardView);
         this.addView(downwardView);
+        this.addView(upwardView);
     }
 
     private void renderCard() {
