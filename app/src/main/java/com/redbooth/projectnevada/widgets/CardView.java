@@ -1,5 +1,6 @@
 package com.redbooth.projectnevada.widgets;
 
+import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
@@ -23,6 +24,7 @@ public class CardView extends FrameLayout {
     private CardModel card;
     private ImageView upwardView;
     private ImageView downwardView;
+    private Animator currentAnimator;
 
     //endregion
 
@@ -108,6 +110,9 @@ public class CardView extends FrameLayout {
     }
 
     private void startHideCardAnimation() {
+        if (currentAnimator != null && currentAnimator.isRunning()) {
+            currentAnimator.cancel();
+        }
         ObjectAnimator rotationCardHideStepOne = ObjectAnimator.ofFloat(upwardView, "rotationY", 0f, -90f);
         ObjectAnimator alphaCardHideStepOne = ObjectAnimator.ofFloat(upwardView, "alpha", 1f, .5f);
         ObjectAnimator scaleXCardHideStepOne = ObjectAnimator.ofFloat(upwardView, "scaleX", 1f, .5f);
@@ -146,9 +151,13 @@ public class CardView extends FrameLayout {
         animatorSet.setDuration(FLIP_ANIMATION_DURATION);
         animatorSet.play(animationStepTwo).after(animationStepOne);
         animatorSet.start();
+        currentAnimator = animatorSet;
     }
 
     private void startDiscoverCardAnimation() {
+        if (currentAnimator != null && currentAnimator.isRunning()) {
+            currentAnimator.cancel();
+        }
         ObjectAnimator rotationCardHideStepOne = ObjectAnimator.ofFloat(upwardView, "rotationY", -180f, -90f);
         ObjectAnimator alphaCardHideStepOne = ObjectAnimator.ofFloat(upwardView, "alpha", 0f, .5f);
         ObjectAnimator scaleXCardHideStepOne = ObjectAnimator.ofFloat(upwardView, "scaleX", 1f, .5f);
@@ -187,6 +196,7 @@ public class CardView extends FrameLayout {
         animatorSet.setDuration(FLIP_ANIMATION_DURATION);
         animatorSet.play(animationStepTwo).after(animationStepOne);
         animatorSet.start();
+        currentAnimator = animatorSet;
     }
 
     private void initializeSelfView() {
