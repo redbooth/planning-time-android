@@ -64,6 +64,10 @@ public class Dealer {
         }
     }
 
+    public Card getCardAtPosition(int position) {
+        return deck.get(position);
+    }
+
     public enum DeckStatus {
         UPWARDS,
         DOWNWARDS

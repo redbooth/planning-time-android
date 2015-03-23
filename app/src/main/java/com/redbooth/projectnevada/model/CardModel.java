@@ -6,34 +6,21 @@ public class CardModel {
     private CardStatus status;
 
     public int getDownwardResourceId() { return downwardResourceId; }
+
     public int getUpwardResourceId() { return upwardResourceId; }
+
     public CardStatus getStatus() { return status; }
 
-    public static class Builder {
-        private CardModel card;
+    public void setUpwardResourceId(int upwardResourceId) {
+        this.upwardResourceId = upwardResourceId;
+    }
 
-        public Builder setDownwardResourceId(int resourceId) {
-            card.downwardResourceId = resourceId;
-            return this;
-        }
+    public void setDownwardResourceId(int downwardResourceId) {
+        this.downwardResourceId = downwardResourceId;
+    }
 
-        public Builder setUpwardResourceId(int resourceId) {
-            card.upwardResourceId = resourceId;
-            return this;
-        }
-
-        public Builder setStatus(CardStatus status) {
-            card.status = status;
-            return this;
-        }
-
-        public Builder() {
-            card = new CardModel();
-        }
-
-        public CardModel build() {
-            return card;
-        }
+    public void setStatus(CardStatus status) {
+        this.status = status;
     }
 
     public enum CardStatus {

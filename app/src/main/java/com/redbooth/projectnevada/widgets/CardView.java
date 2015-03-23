@@ -101,12 +101,8 @@ public class CardView extends FrameLayout {
     private CardModel getCard() {
         if (!isInEditMode()) {
             return card;
-        } else {
-            return new CardModel.Builder()
-                                    .setUpwardResourceId(R.drawable.card_upward_ping_pong)
-                                    .setDownwardResourceId(R.drawable.card_downward)
-                                    .build();
         }
+        return null;
     }
 
     private void startHideCardAnimation() {
