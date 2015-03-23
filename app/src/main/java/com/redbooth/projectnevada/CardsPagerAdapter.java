@@ -16,6 +16,16 @@ public class CardsPagerAdapter extends FragmentPagerAdapter {
     private final List<CardFragment> fragmentList;
     private final List<CardModel> cardModelList;
 
+    private CardFragment.OnCardStatusChangeListener onCardFragmentStateChange = new CardFragment.OnCardStatusChangeListener() {
+        @Override
+        public void onCardStatusChange(Fragment fragment, CardModel card, CardModel.CardStatus newStatus) {
+            for(int index = 0; index < cardModelList.size(); index++) {
+                cardModelList.get(index).setStatus(newStatus);
+                fragmentList.get(index).setCardStatus(newStatus);
+            }
+        }
+    };
+
     public CardsPagerAdapter(FragmentManager fragmentManager, Dealer dealer) {
         super(fragmentManager);
         this.dealer = dealer;
@@ -28,7 +38,9 @@ public class CardsPagerAdapter extends FragmentPagerAdapter {
     private void initializeFragmentPool() {
         int count = dealer.getDeckLength();
         while (count-- > 0) {
-            fragmentList.add(new CardFragment());
+            CardFragment fragment = new CardFragment();
+            fragment.setOnCardStatusChangeListener(onCardFragmentStateChange);
+            fragmentList.add(fragment);
         }
     }
 

@@ -11,10 +11,13 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.redbooth.projectnevada.R;
 import com.redbooth.projectnevada.model.CardModel;
 
 public class CardView extends FrameLayout {
+
+    public interface OnCardStatusChangeListener {
+        void onCardStatusChange(CardView view, CardModel card, CardModel.CardStatus newStatus);
+    }
 
     //region "PRIVATE VARIABLES"
 
@@ -25,6 +28,7 @@ public class CardView extends FrameLayout {
     private ImageView upwardView;
     private ImageView downwardView;
     private Animator currentAnimator;
+    private OnCardStatusChangeListener listener;
 
     //endregion
 
@@ -45,10 +49,17 @@ public class CardView extends FrameLayout {
 
     //region "PUBLIC METHODS"
 
+    public void setOnCardViewStatusChangeListener(OnCardStatusChangeListener listener) {
+        this.listener = listener;
+    }
+
     public void revealCard() {
         if (cardStatus == CardModel.CardStatus.DOWNWARDS) {
             this.cardStatus = CardModel.CardStatus.UPWARDS;
             startDiscoverCardAnimation();
+            if (listener != null) {
+                listener.onCardStatusChange(this, card, cardStatus);
+            }
         }
     }
 
@@ -56,6 +67,9 @@ public class CardView extends FrameLayout {
         if (cardStatus == CardModel.CardStatus.UPWARDS) {
             this.cardStatus = CardModel.CardStatus.DOWNWARDS;
             startHideCardAnimation();
+            if (listener != null) {
+                listener.onCardStatusChange(this, card, cardStatus);
+            }
         }
     }
 
