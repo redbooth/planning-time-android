@@ -3,7 +3,6 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 21
     buildToolsVersion "21.1.2"
-
     defaultConfig {
         applicationId "com.redbooth.projectnevada"
         minSdkVersion 21
@@ -11,10 +10,19 @@ android {
         versionCode 1
         versionName "1.0"
     }
+    signingConfigs {
+        releaseSign {
+            keyAlias 'nevada'
+            keyPassword 'nevada'
+            storeFile file('/Users/txus/Documents/repositories/nevada/project-nevada/signing/nevada.jks')
+            storePassword 'nevada'
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.releaseSign
         }
     }
 }
