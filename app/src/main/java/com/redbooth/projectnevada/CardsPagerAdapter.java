@@ -37,7 +37,7 @@ public class CardsPagerAdapter extends FragmentPagerAdapter {
 
     private void initializeFragmentPool() {
         int count = dealer.getDeckLength();
-        while (count-- > 0) {
+        for(int index = 0; index < count; index++) {
             CardFragment fragment = new CardFragment();
             fragment.setOnCardStatusChangeListener(onCardFragmentStateChange);
             fragmentList.add(fragment);
@@ -46,7 +46,7 @@ public class CardsPagerAdapter extends FragmentPagerAdapter {
 
     private void initializeCardModelPool() {
         int count = dealer.getDeckLength();
-        while (count-- > 0) {
+        for(int index = 0; index < count; index++) {
             CardModel cardModel = new CardModel();
             cardModel.setDownwardResourceId(R.drawable.cover_big);
             cardModel.setUpwardResourceId(R.drawable.card14_big);

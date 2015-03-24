@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.redbooth.projectnevada.core.Dealer;
@@ -15,6 +16,7 @@ import com.redbooth.projectnevada.core.DealerFactory;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnItemClick;
 
 public class CardGridFragment extends Fragment {
 
@@ -25,8 +27,7 @@ public class CardGridFragment extends Fragment {
         public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
             int radius = (int) Math.hypot(right, bottom);
             Animator reveal = ViewAnimationUtils.createCircularReveal(v, right, bottom, 0, radius);
-            reveal.setInterpolator(new DecelerateInterpolator());
-            reveal.setDuration(1000);
+            reveal.setDuration(500);
             reveal.start();
         }
     };
@@ -50,5 +51,11 @@ public class CardGridFragment extends Fragment {
         Dealer dealer = DealerFactory.newInstance();
         adapter = new CardsGridAdapter(getActivity(), dealer);
         list.setAdapter(adapter);
+    }
+
+    @OnItemClick(R.id.list)
+    public void onItemClick(int position) {
+        ((MainActivity)getActivity()).selectCard(position);
+        ((MainActivity)getActivity()).showListFragment();
     }
 }

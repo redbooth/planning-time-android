@@ -13,21 +13,16 @@ import com.redbooth.projectnevada.core.DealerFactory;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 public class CardListFragment extends Fragment {
     @InjectView(R.id.pager) ViewPager viewPager;
     @InjectView(R.id.floating) FloatingActionButton floatingButton;
+    private CardsPagerAdapter cardsPagerAdapter;
 
     public static CardListFragment newInstance() {
         return new CardListFragment();
     }
-
-    private View.OnClickListener onFloatingClick = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            ((MainActivity)getActivity()).showGridFragment();
-        }
-    };
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -39,8 +34,16 @@ public class CardListFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         final Dealer dealer = DealerFactory.newInstance();
-        CardsPagerAdapter cardsPagerAdapter = new CardsPagerAdapter(getFragmentManager(), dealer);
+        this.cardsPagerAdapter = new CardsPagerAdapter(getFragmentManager(), dealer);
         this.viewPager.setAdapter(cardsPagerAdapter);
-        floatingButton.setOnClickListener(onFloatingClick);
+    }
+
+    @OnClick(R.id.floating)
+    protected void onFloatingClick() {
+        ((MainActivity)getActivity()).showGridFragment();
+    }
+
+    public void selectCard(int position) {
+        viewPager.setCurrentItem(position, true);
     }
 }

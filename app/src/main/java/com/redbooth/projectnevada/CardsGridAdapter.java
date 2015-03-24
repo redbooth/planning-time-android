@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import com.redbooth.projectnevada.core.Card;
 import com.redbooth.projectnevada.core.Dealer;
 import com.redbooth.projectnevada.model.CardModel;
-import com.redbooth.projectnevada.widgets.CardView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,9 +60,9 @@ public class CardsGridAdapter extends BaseAdapter {
                                 .inflate(R.layout.item_small_card, null);
         }
         CardModel card = cardModelList.get(position);
-        CardView cardView = (CardView)result.findViewById(R.id.card);
-        cardView.setCard(card);
-        cardView.setAnimationDuration(80);
+        ImageView cardView = (ImageView)result.findViewById(R.id.card);
+        cardView.setImageResource(card.getUpwardResourceId());
+        result.setTag(card);
         return result;
     }
 

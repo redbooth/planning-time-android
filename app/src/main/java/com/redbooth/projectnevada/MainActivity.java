@@ -22,6 +22,14 @@ public class MainActivity extends FragmentActivity {
                 .commit();
     }
 
+    public void selectCard(int position) {
+        cardListFragment.selectCard(position);
+    }
+
+    public void showListFragment() {
+        getSupportFragmentManager().popBackStack();
+    }
+
     public void showGridFragment() {
         getSupportFragmentManager().beginTransaction()
                 .show(cardGridFragment)
