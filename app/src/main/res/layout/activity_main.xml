@@ -6,37 +6,9 @@
     android:orientation="vertical"
     android:background="@color/background">
 
-    <ImageView
-        android:padding="@dimen/margin_normal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/logo"/>
+   <FrameLayout
+       android:id="@+id/content_layout"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent" />
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/pager"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/card_big_height" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/margin_normal"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/arrow_left"/>
-
-        <Space
-            android:layout_width="@dimen/margin_normal"
-            android:layout_height="match_parent" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/arrow_right"/>
-
-     </LinearLayout>
 </LinearLayout>

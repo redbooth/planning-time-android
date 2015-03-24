@@ -29,6 +29,7 @@ public class CardView extends FrameLayout {
     private ImageView downwardView;
     private Animator currentAnimator;
     private OnCardStatusChangeListener listener;
+    private int animationDuration = FLIP_ANIMATION_DURATION;
 
     //endregion
 
@@ -51,6 +52,10 @@ public class CardView extends FrameLayout {
 
     public void setOnCardViewStatusChangeListener(OnCardStatusChangeListener listener) {
         this.listener = listener;
+    }
+
+    public void setAnimationDuration(int  duration) {
+        animationDuration = duration;
     }
 
     public void revealCard() {
@@ -158,7 +163,7 @@ public class CardView extends FrameLayout {
         animationStepTwo.play(hideStepTwo).with(discoverStepTwo);
 
         AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.setDuration(FLIP_ANIMATION_DURATION);
+        animatorSet.setDuration(animationDuration);
         animatorSet.play(animationStepTwo).after(animationStepOne);
         animatorSet.start();
         currentAnimator = animatorSet;
@@ -203,7 +208,7 @@ public class CardView extends FrameLayout {
         animationStepTwo.play(hideStepTwo).with(discoverStepTwo);
 
         AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.setDuration(FLIP_ANIMATION_DURATION);
+        animatorSet.setDuration(animationDuration);
         animatorSet.play(animationStepTwo).after(animationStepOne);
         animatorSet.start();
         currentAnimator = animatorSet;

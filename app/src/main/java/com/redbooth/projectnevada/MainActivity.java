@@ -1,25 +1,31 @@
 package com.redbooth.projectnevada;
 
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-
-import com.redbooth.projectnevada.core.Dealer;
-import com.redbooth.projectnevada.core.DealerFactory;
-
-import butterknife.ButterKnife;
-import butterknife.InjectView;
+import android.support.v4.app.FragmentActivity;
 
 public class MainActivity extends FragmentActivity {
-    @InjectView(R.id.pager) ViewPager viewPager;
+    private CardListFragment cardListFragment;
+    private CardGridFragment cardGridFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.inject(this);
-        Dealer dealer = DealerFactory.newInstance();
-        CardsPagerAdapter cardsPagerAdapter = new CardsPagerAdapter(getSupportFragmentManager(), dealer);
-        this.viewPager.setAdapter(cardsPagerAdapter);
+        cardListFragment = CardListFragment.newInstance();
+        cardGridFragment = CardGridFragment.newInstance();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.content_layout, cardListFragment, "CardListFragment")
+                .add(R.id.content_layout, cardGridFragment, "CardGridFragment")
+                .hide(cardGridFragment)
+                .show(cardListFragment)
+                .commit();
+    }
+
+    public void showGridFragment() {
+        getSupportFragmentManager().beginTransaction()
+                .show(cardGridFragment)
+                .addToBackStack(null)
+                .commit();
     }
 }

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Project Nevada</string>
+    <string name="legend">LEGEND</string>
+    <string name="cover">COVER</string>
 </resources>
