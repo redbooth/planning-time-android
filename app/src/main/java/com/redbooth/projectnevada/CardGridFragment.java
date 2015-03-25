@@ -20,9 +20,7 @@ import butterknife.OnItemClick;
 
 public class CardGridFragment extends Fragment {
 
-    @InjectView(R.id.list) GridView list;
-
-    View.OnLayoutChangeListener onLayoutChangeListener = new View.OnLayoutChangeListener() {
+    private final View.OnLayoutChangeListener onLayoutChangeListener = new View.OnLayoutChangeListener() {
         @Override
         public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
             int radius = (int) Math.hypot(right, bottom);
@@ -32,7 +30,7 @@ public class CardGridFragment extends Fragment {
         }
     };
 
-    private CardsGridAdapter adapter;
+    @InjectView(R.id.list) GridView list;
 
     public static CardGridFragment newInstance() {
         return new CardGridFragment();
@@ -49,11 +47,11 @@ public class CardGridFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         Dealer dealer = DealerFactory.newInstance();
-        adapter = new CardsGridAdapter(getActivity(), dealer);
+        CardsGridAdapter adapter = new CardsGridAdapter(getActivity(), dealer);
         list.setAdapter(adapter);
     }
 
-    @OnItemClick(R.id.list)
+    @OnItemClick(R.id.list) @SuppressWarnings("unused")
     public void onItemClick(int position) {
         ((MainActivity)getActivity()).selectCard(position);
         ((MainActivity)getActivity()).showListFragment();

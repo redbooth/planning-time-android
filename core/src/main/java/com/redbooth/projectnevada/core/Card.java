@@ -12,7 +12,7 @@ public enum Card {
     HUNDRED,
     INFINITE,
     UNKNOWN,
-    PAUSE,
     BROWN,
-    YAK_SHAVING
+    YAK_SHAVING,
+    PAUSE
 }

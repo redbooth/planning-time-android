@@ -17,8 +17,6 @@ import butterknife.OnClick;
 
 public class CardListFragment extends Fragment {
     @InjectView(R.id.pager) ViewPager viewPager;
-    @InjectView(R.id.floating) FloatingActionButton floatingButton;
-    private CardsPagerAdapter cardsPagerAdapter;
 
     public static CardListFragment newInstance() {
         return new CardListFragment();
@@ -34,11 +32,11 @@ public class CardListFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         final Dealer dealer = DealerFactory.newInstance();
-        this.cardsPagerAdapter = new CardsPagerAdapter(getFragmentManager(), dealer);
+        CardsPagerAdapter cardsPagerAdapter = new CardsPagerAdapter(getFragmentManager(), dealer);
         this.viewPager.setAdapter(cardsPagerAdapter);
     }
 
-    @OnClick(R.id.floating)
+    @OnClick(R.id.floating) @SuppressWarnings("unused")
     protected void onFloatingClick() {
         ((MainActivity)getActivity()).showGridFragment();
     }
