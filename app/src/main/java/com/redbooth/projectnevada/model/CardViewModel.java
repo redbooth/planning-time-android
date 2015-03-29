@@ -1,6 +1,6 @@
 package com.redbooth.projectnevada.model;
 
-public class CardModel {
+public class CardViewModel {
     private int upwardResourceId;
     private int downwardResourceId;
     private CardStatus status;

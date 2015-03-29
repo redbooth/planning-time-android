@@ -11,20 +11,20 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.redbooth.projectnevada.model.CardModel;
+import com.redbooth.projectnevada.model.CardViewModel;
 
 public class CardView extends FrameLayout {
 
     public interface OnCardStatusChangeListener {
-        void onCardStatusChange(CardView view, CardModel card, CardModel.CardStatus newStatus);
+        void onCardStatusChange(CardView view, CardViewModel card, CardViewModel.CardStatus newStatus);
     }
 
     //region "PRIVATE VARIABLES"
 
     private final static int FLIP_ANIMATION_DURATION = 200;
 
-    private CardModel.CardStatus cardStatus;
-    private CardModel card;
+    private CardViewModel.CardStatus cardStatus;
+    private CardViewModel card;
     private ImageView upwardView;
     private ImageView downwardView;
     private Animator currentAnimator;
@@ -38,7 +38,7 @@ public class CardView extends FrameLayout {
     private OnClickListener onCardClick = new OnClickListener() {
         @Override
         public void onClick(View view) {
-            if (cardStatus == CardModel.CardStatus.UPWARDS) {
+            if (cardStatus == CardViewModel.CardStatus.UPWARDS) {
                 hideCard();
             } else {
                 revealCard();
@@ -59,8 +59,8 @@ public class CardView extends FrameLayout {
     }
 
     public void revealCard() {
-        if (cardStatus == CardModel.CardStatus.DOWNWARDS) {
-            this.cardStatus = CardModel.CardStatus.UPWARDS;
+        if (cardStatus == CardViewModel.CardStatus.DOWNWARDS) {
+            this.cardStatus = CardViewModel.CardStatus.UPWARDS;
             startDiscoverCardAnimation();
             if (listener != null) {
                 listener.onCardStatusChange(this, card, cardStatus);
@@ -69,8 +69,8 @@ public class CardView extends FrameLayout {
     }
 
     public void hideCard() {
-        if (cardStatus == CardModel.CardStatus.UPWARDS) {
-            this.cardStatus = CardModel.CardStatus.DOWNWARDS;
+        if (cardStatus == CardViewModel.CardStatus.UPWARDS) {
+            this.cardStatus = CardViewModel.CardStatus.DOWNWARDS;
             startHideCardAnimation();
             if (listener != null) {
                 listener.onCardStatusChange(this, card, cardStatus);
@@ -78,7 +78,7 @@ public class CardView extends FrameLayout {
         }
     }
 
-    public void setCard(CardModel card) {
+    public void setCard(CardViewModel card) {
         this.card = card;
         this.cardStatus = card.getStatus();
         renderCard();
@@ -117,7 +117,7 @@ public class CardView extends FrameLayout {
 
     //region "PRIVATE METHODS"
 
-    private CardModel getCard() {
+    private CardViewModel getCard() {
         if (!isInEditMode()) {
             return card;
         }
@@ -235,7 +235,7 @@ public class CardView extends FrameLayout {
             upwardView.setImageDrawable(getUpwardDrawable());
             downwardView.setImageDrawable(getDownwardDrawable());
         }
-        if (card.getStatus() == CardModel.CardStatus.UPWARDS) {
+        if (card.getStatus() == CardViewModel.CardStatus.UPWARDS) {
             upwardView.bringToFront();
         } else {
             downwardView.bringToFront();

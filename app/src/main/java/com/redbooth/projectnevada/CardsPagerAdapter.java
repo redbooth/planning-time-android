@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.redbooth.projectnevada.core.*;
-import com.redbooth.projectnevada.model.CardModel;
+import com.redbooth.projectnevada.model.CardViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,13 +14,13 @@ import java.util.List;
 public class CardsPagerAdapter extends FragmentPagerAdapter {
     private final Dealer dealer;
     private final List<CardFragment> fragmentList;
-    private final List<CardModel> cardModelList;
+    private final List<CardViewModel> cardViewModelList;
 
     private CardFragment.OnCardStatusChangeListener onCardFragmentStateChange = new CardFragment.OnCardStatusChangeListener() {
         @Override
-        public void onCardStatusChange(Fragment fragment, CardModel card, CardModel.CardStatus newStatus) {
-            for(int index = 0; index < cardModelList.size(); index++) {
-                cardModelList.get(index).setStatus(newStatus);
+        public void onCardStatusChange(Fragment fragment, CardViewModel card, CardViewModel.CardStatus newStatus) {
+            for(int index = 0; index < cardViewModelList.size(); index++) {
+                cardViewModelList.get(index).setStatus(newStatus);
                 fragmentList.get(index).setCardStatus(newStatus);
             }
         }
@@ -30,7 +30,7 @@ public class CardsPagerAdapter extends FragmentPagerAdapter {
         super(fragmentManager);
         this.dealer = dealer;
         this.fragmentList = new ArrayList<>(dealer.getDeckLength());
-        this.cardModelList = new ArrayList<>(dealer.getDeckLength());
+        this.cardViewModelList = new ArrayList<>(dealer.getDeckLength());
         initializeFragmentPool();
         initializeCardModelPool();
     }
@@ -47,24 +47,24 @@ public class CardsPagerAdapter extends FragmentPagerAdapter {
     private void initializeCardModelPool() {
         int count = dealer.getDeckLength();
         for(int index = 0; index < count; index++) {
-            CardModel cardModel = new CardModel();
-            cardModel.setDownwardResourceId(R.drawable.cover_big);
-            cardModel.setUpwardResourceId(R.drawable.card14_big);
-            CardModel.CardStatus cardStatus = CardModel.CardStatus.UPWARDS;
+            CardViewModel cardViewModel = new CardViewModel();
+            cardViewModel.setDownwardResourceId(R.drawable.cover_big);
+            cardViewModel.setUpwardResourceId(R.drawable.card14_big);
+            CardViewModel.CardStatus cardStatus = CardViewModel.CardStatus.UPWARDS;
             if (dealer.getDeckStatus() == Dealer.DeckStatus.DOWNWARDS) {
-                cardStatus = CardModel.CardStatus.DOWNWARDS;
+                cardStatus = CardViewModel.CardStatus.DOWNWARDS;
             }
-            cardModel.setStatus(cardStatus);
-            cardModelList.add(cardModel);
+            cardViewModel.setStatus(cardStatus);
+            cardViewModelList.add(cardViewModel);
         }
     }
 
     @Override
     public Fragment getItem(int position) {
         CardFragment fragment = fragmentList.get(position);
-        CardModel cardModel = cardModelList.get(position);
-        cardModel.setUpwardResourceId(getUpwardResourceId(position));
-        fragment.setCard(cardModel);
+        CardViewModel cardViewModel = cardViewModelList.get(position);
+        cardViewModel.setUpwardResourceId(getUpwardResourceId(position));
+        fragment.setCard(cardViewModel);
         return fragment;
     }
 

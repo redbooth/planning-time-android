@@ -2,12 +2,11 @@ package com.redbooth.projectnevada;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.redbooth.projectnevada.model.CardModel;
+import com.redbooth.projectnevada.model.CardViewModel;
 import com.redbooth.projectnevada.widgets.CardView;
 
 import butterknife.ButterKnife;
@@ -15,12 +14,12 @@ import butterknife.InjectView;
 
 public class CardFragment extends Fragment {
     public interface OnCardStatusChangeListener {
-        void onCardStatusChange(Fragment fragment, CardModel card, CardModel.CardStatus newStatus);
+        void onCardStatusChange(Fragment fragment, CardViewModel card, CardViewModel.CardStatus newStatus);
     }
 
     private CardView.OnCardStatusChangeListener cardStatusChangeListener = new CardView.OnCardStatusChangeListener() {
         @Override
-        public void onCardStatusChange(CardView view, CardModel card, CardModel.CardStatus newStatus) {
+        public void onCardStatusChange(CardView view, CardViewModel card, CardViewModel.CardStatus newStatus) {
             if (listener != null) {
                 listener.onCardStatusChange(CardFragment.this, card, newStatus);
             }
@@ -28,7 +27,7 @@ public class CardFragment extends Fragment {
     };
 
     @InjectView(R.id.card) CardView cardView;
-    private CardModel intialModel;
+    private CardViewModel intialModel;
     private OnCardStatusChangeListener listener;
 
     public void setOnCardStatusChangeListener(OnCardStatusChangeListener listener) {
@@ -44,9 +43,9 @@ public class CardFragment extends Fragment {
        return view;
     }
 
-    public void setCardStatus(CardModel.CardStatus status) {
+    public void setCardStatus(CardViewModel.CardStatus status) {
         if (cardView != null) {
-            if (status == CardModel.CardStatus.DOWNWARDS) {
+            if (status == CardViewModel.CardStatus.DOWNWARDS) {
                 cardView.hideCard();
             } else {
                 cardView.revealCard();
@@ -58,11 +57,11 @@ public class CardFragment extends Fragment {
         }
     }
 
-    public void setCard(CardModel cardModel) {
+    public void setCard(CardViewModel cardViewModel) {
         if (cardView != null) {
-            cardView.setCard(cardModel);
+            cardView.setCard(cardViewModel);
         } else {
-            intialModel = cardModel;
+            intialModel = cardViewModel;
         }
     }
 }

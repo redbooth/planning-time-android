@@ -9,7 +9,7 @@ import android.widget.ImageView;
 
 import com.redbooth.projectnevada.core.Card;
 import com.redbooth.projectnevada.core.Dealer;
-import com.redbooth.projectnevada.model.CardModel;
+import com.redbooth.projectnevada.model.CardViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,12 +17,12 @@ import java.util.List;
 public class CardsGridAdapter extends BaseAdapter {
     private final Context context;
     private final Dealer dealer;
-    private final List<CardModel> cardModelList;
+    private final List<CardViewModel> cardViewModelList;
 
     public CardsGridAdapter(Context context, Dealer dealer) {
         this.context = context;
         this.dealer = dealer;
-        cardModelList = new ArrayList<>();
+        cardViewModelList = new ArrayList<>();
         initializeCardModelPool();
     }
 
@@ -30,11 +30,11 @@ public class CardsGridAdapter extends BaseAdapter {
         int count = dealer.getDeckLength();
         for(int index = 0; index < count; index++) {
             int upwardResourceId = getUpwardResourceId(index);
-            CardModel cardModel = new CardModel();
-            cardModel.setDownwardResourceId(R.drawable.cover_big);
-            cardModel.setUpwardResourceId(upwardResourceId);
-            cardModel.setStatus(CardModel.CardStatus.UPWARDS);
-            cardModelList.add(cardModel);
+            CardViewModel cardViewModel = new CardViewModel();
+            cardViewModel.setDownwardResourceId(R.drawable.cover_big);
+            cardViewModel.setUpwardResourceId(upwardResourceId);
+            cardViewModel.setStatus(CardViewModel.CardStatus.UPWARDS);
+            cardViewModelList.add(cardViewModel);
         }
     }
 
@@ -59,7 +59,7 @@ public class CardsGridAdapter extends BaseAdapter {
                             .from(context)
                                 .inflate(R.layout.item_small_card, null);
         }
-        CardModel card = cardModelList.get(position);
+        CardViewModel card = cardViewModelList.get(position);
         ImageView cardView = (ImageView)result.findViewById(R.id.card);
         cardView.setImageResource(card.getUpwardResourceId());
         result.setTag(card);

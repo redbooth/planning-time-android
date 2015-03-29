@@ -23,7 +23,8 @@ public class CardListFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_card_list, container, false);
         ButterKnife.inject(this, view);
         return view;
@@ -38,7 +39,7 @@ public class CardListFragment extends Fragment {
 
     @OnClick(R.id.floating) @SuppressWarnings("unused")
     protected void onFloatingClick() {
-        ((MainActivity)getActivity()).showGridFragment();
+        ((MainActivity) getActivity()).showGridFragment();
     }
 
     public void selectCard(int position) {
