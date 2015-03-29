@@ -1,6 +1,5 @@
 package com.redbooth.projectnevada;
 
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -15,24 +14,29 @@ public class CardsPagerAdapter extends FragmentPagerAdapter {
     private final Dealer dealer;
     private final List<CardFragment> fragmentList;
     private final List<CardViewModel> cardViewModelList;
-
-    private CardFragment.OnCardStatusChangeListener onCardFragmentStateChange = new CardFragment.OnCardStatusChangeListener() {
-        @Override
-        public void onCardStatusChange(Fragment fragment, CardViewModel card, CardViewModel.CardStatus newStatus) {
-            for(int index = 0; index < cardViewModelList.size(); index++) {
-                cardViewModelList.get(index).setStatus(newStatus);
-                fragmentList.get(index).setCardStatus(newStatus);
-            }
-        }
-    };
+    private CardFragment.OnCardStatusChangeListener onCardFragmentStateChange;
 
     public CardsPagerAdapter(FragmentManager fragmentManager, Dealer dealer) {
         super(fragmentManager);
         this.dealer = dealer;
         this.fragmentList = new ArrayList<>(dealer.getDeckLength());
         this.cardViewModelList = new ArrayList<>(dealer.getDeckLength());
+        initializeListener();
         initializeFragmentPool();
         initializeCardModelPool();
+    }
+
+    private void initializeListener() {
+        onCardFragmentStateChange = new CardFragment.OnCardStatusChangeListener() {
+            @Override
+            public void onCardStatusChange(Fragment fragment, CardViewModel card, CardViewModel.CardStatus newStatus) {
+                for(int index = 0; index < cardViewModelList.size(); index++) {
+                    cardViewModelList.get(index).setStatus(newStatus);
+                    fragmentList.get(index).setCardStatus(newStatus);
+                    dealer.flipDeck();
+                }
+            }
+        };
     }
 
     private void initializeFragmentPool() {

@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.redbooth.projectnevada.core.Dealer;
 import com.redbooth.projectnevada.core.DealerFactory;
 
