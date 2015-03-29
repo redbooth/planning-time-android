@@ -1,5 +1,7 @@
 package com.redbooth.projectnevada.model;
 
+import com.redbooth.projectnevada.R;
+
 import java.io.Serializable;
 
 public class CardViewModel implements Serializable {
@@ -9,6 +11,8 @@ public class CardViewModel implements Serializable {
 
     public CardViewModel() {
         this.status = CardStatus.UPWARDS;
+        this.downwardResourceId = R.drawable.cover_big;
+        this.upwardResourceId = R.drawable.card01_big;
     }
 
     public int getDownwardResourceId() { return downwardResourceId; }
