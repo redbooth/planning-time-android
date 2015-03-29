@@ -54,10 +54,6 @@ public class CardView extends FrameLayout {
         this.listener = listener;
     }
 
-    public void setAnimationDuration(int  duration) {
-        animationDuration = duration;
-    }
-
     public void revealCard() {
         if (cardStatus == CardViewModel.CardStatus.DOWNWARDS) {
             this.cardStatus = CardViewModel.CardStatus.UPWARDS;
