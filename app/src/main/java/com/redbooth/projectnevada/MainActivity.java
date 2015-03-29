@@ -18,8 +18,8 @@ public class MainActivity extends FragmentActivity {
     }
 
     private void initializeFragments() {
-        initializeGridFragment();
         initializeListFragment();
+        initializeGridFragment();
     }
 
     private void initializeListFragment() {
@@ -40,11 +40,6 @@ public class MainActivity extends FragmentActivity {
                 getSupportFragmentManager().findFragmentByTag(TAG_CARD_GRID_FRAGMENT);
         if (cardGridFragment == null) {
             cardGridFragment = CardGridFragment.newInstance();
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .add(R.id.content_layout, cardGridFragment, TAG_CARD_GRID_FRAGMENT)
-                    .hide(cardGridFragment)
-                    .commit();
         }
     }
 
@@ -58,6 +53,7 @@ public class MainActivity extends FragmentActivity {
 
     public void showGridFragment() {
         getSupportFragmentManager().beginTransaction()
+                .add(R.id.content_layout, cardGridFragment, TAG_CARD_GRID_FRAGMENT)
                 .show(cardGridFragment)
                 .addToBackStack(null)
                 .commit();
