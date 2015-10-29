@@ -46,14 +46,13 @@
          </LinearLayout>
     </LinearLayout>
 
-    <com.getbase.floatingactionbutton.FloatingActionButton
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/floating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_small"
-        app:fab_icon="@drawable/ic_button_main"
-        app:fab_colorNormal="@color/brand_red"
-        app:fab_colorPressed="@color/brand_red_2"
+        android:src="@drawable/ic_button_main"
+        app:backgroundTint="@color/brand_red"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="16dp"/>

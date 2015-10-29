@@ -38,7 +38,7 @@ public class CardListFragment extends Fragment {
 
     @OnClick(R.id.floating) @SuppressWarnings("unused")
     protected void onFloatingClick() {
-        ((MainActivity) getActivity()).showGridFragment();
+        ((MainActivity)getActivity()).showGridFragment();
     }
 
     public void selectCard(int position) {

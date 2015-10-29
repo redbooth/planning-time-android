@@ -17,12 +17,5 @@
             android:layout_gravity="center"
             tool:src="@drawable/card01_small"/>
 
-        <!--
-        <com.redbooth.projectnevada.widgets.CardView
-            android:id="@+id/card"
-            android:layout_width="@dimen/card_small_width"
-            android:layout_height="@dimen/card_small_height"
-            android:layout_gravity="center" />
-        -->
     </FrameLayout>
 </FrameLayout>
