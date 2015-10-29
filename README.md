@@ -1,11 +1,15 @@
 Planning Time! is the planning poker app designed and developed by Redbooth. Use it to make your sprint planning meetings even more fun! 
 
-Learn the story behind these scrum cards (including the meaning of each card): https://redbooth.com/blog/scrum-planning-poker-cards
+Learn the story behind these scrum cards (including the meaning of each card): [scrum-planning-poker-cards](https://redbooth.com/blog/scrum-planning-poker-cards)
 
-But that’s not all! You can also print your own deck. Design is open sourced too and you can find it here https://github.com/redbooth/Scrum-poker-cards
+But that’s not all! You can also print your own deck. Design is open sourced too and you can find it [here](https://github.com/redbooth/Scrum-poker-cards)
 
-Design and illustration: Polina Flegontovna (@flegontovna)
-Development: Txus Ballesteros (@txusballesteros), Rubén Serrano (@akelael)
+Contributors
+============
+
+* Design and illustration: Polina Flegontovna ([@flegontovna](https://twitter.com/flegontovna))
+
+* Development: Txus Ballesteros ([@txusballesteros](https://twitter.com/txusballesteros)), Rubén Serrano ([@akelael](https://twitter.com/akelael))
 
 License
 =======
