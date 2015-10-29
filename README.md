@@ -4,6 +4,8 @@ Learn the story behind these scrum cards (including the meaning of each card): [
 
 But that’s not all! You can also print your own deck. Design is open sourced too and you can find it [here](https://github.com/redbooth/Scrum-poker-cards)
 
+[![](https://developer.android.com/images/brand/en_generic_rgb_wo_45.png)](https://play.google.com/store/apps/details?id=com.redbooth.projectnevada)
+
 Contributors
 ============
 
