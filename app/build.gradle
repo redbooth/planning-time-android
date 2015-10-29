@@ -10,14 +10,6 @@ android {
         versionCode 4
         versionName "1.1"
     }
-    signingConfigs {
-        releaseSign {
-            keyAlias 'nevada'
-            keyPassword 'nevada'
-            storeFile file('/Users/txus/Documents/repositories/nevada/project-nevada/signing/nevada.jks')
-            storePassword 'nevada'
-        }
-    }
     buildTypes {
         release {
             minifyEnabled false
@@ -25,7 +17,11 @@ android {
             signingConfig signingConfigs.releaseSign
         }
     }
+    lintOptions {
+        abortOnError false
+    }
 }
+
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
