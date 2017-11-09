@@ -14,7 +14,7 @@ But that’s not all! You can also print your own deck. Design is open sourced t
 Contributors
 ============
 
-* Design and Illustration: _Polina Flegontovna_ ([@flegontovna](https://twitter.com/flegontovna))
+* Design and Illustration: _Polina Raevskaya_ ([@flegontovna](https://twitter.com/flegontovna))
 
 * Development: _Txus Ballesteros_ ([@txusballesteros](https://twitter.com/txusballesteros)), _Rubén Serrano_ ([@akelael](https://twitter.com/akelael))
 
